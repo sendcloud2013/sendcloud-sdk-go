@@ -132,7 +132,6 @@ func (e *MailReceiver) validateReceiver() error {
 		receivers := 0
 		if e.To != "" {
 			toAddresses := strings.Split(e.To, ";")
-			// 过滤空字符串并计算非空地址的数量
 			for range toAddresses {
 				receivers++
 			}
