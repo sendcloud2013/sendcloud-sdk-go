@@ -129,12 +129,26 @@ func (e *MailReceiver) validateReceiver() error {
 			return errors.New("address list exceeds limit")
 		}
 	} else {
-		to := strings.Split(e.To, ";")
-		cc := strings.Split(e.CC, ";")
-		bcc := strings.Split(e.BCC, ";")
-		receivers := len(to)
-		receivers += len(cc)
-		receivers += len(bcc)
+		receivers := 0
+		if e.To != "" {
+			toAddresses := strings.Split(e.To, ";")
+			// 过滤空字符串并计算非空地址的数量
+			for range toAddresses {
+				receivers++
+			}
+		}
+		if e.CC != "" {
+			ccAddresses := strings.Split(e.CC, ";")
+			for range ccAddresses {
+				receivers++
+			}
+		}
+		if e.BCC != "" {
+			bccAddresses := strings.Split(e.BCC, ";")
+			for range bccAddresses {
+				receivers++
+			}
+		}
 		// Check if the total number of receivers exceeds the maximum allowed
 		if receivers > MAX_RECEIVERS {
 			return errors.New("the total number of receivers exceeds the maximum allowed")
@@ -174,7 +188,7 @@ func (x XSMTPAPI) validateXSMTPAPI() error {
 			if !(len(key) >= 2 && key[0] == '%' && key[len(key)-1] == '%') {
 				return errors.New(fmt.Sprintf("the key needs to be in the format '%%...%%'; [%s] does not satisfy this condition", key))
 			}
-        }
+		}
 	}
 	if x.Filters != nil {
 		err := x.Filters.ValidateFilter()
