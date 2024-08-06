@@ -1,4 +1,4 @@
-# sendcloud-sms-go
+# SendCloud SMS Go SDK
 
 ### 1. Import the Package
 
@@ -6,7 +6,7 @@ First, you need to import the Go package that contains the `sendcloud`. Let's as
 
 ```go
 import (  
-    "github.com/frank-email-sms/sendcloud-sms-go"
+    "github.com/sendcloud2013/sendcloud-sdk-go/sms"
 )
 ```
 
@@ -61,7 +61,7 @@ package main
 import (  
     "fmt"  
     "log"
-    "github.com/frank-email-sms/sendcloud-sms-go"  
+    "github.com/sendcloud2013/sendcloud-sdk-go/sms"  
 )  
   
 func main() {  
