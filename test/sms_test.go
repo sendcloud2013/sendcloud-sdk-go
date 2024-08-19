@@ -1,17 +1,20 @@
-package sendcloud
+package test
 
-import "testing"
+import (
+	"github.com/sendcloud2013/sendcloud-sdk-go/sms"
+	"testing"
+)
 
 func TestSendTemplateSms(t *testing.T) {
-	client, err := NewSendCloudSms("**", "**")
+	client, err := sendcloud.NewSendCloudSms("**", "**")
 	if err != nil {
 		t.Error(err)
 	}
-	result, err := client.SendTemplateSms(&TemplateSms{
+	result, err := client.SendTemplateSms(&sendcloud.TemplateSms{
 		TemplateId: 1,
 		LabelId:    1,
 		Phone:      "13800138000,13800138001",
-		MsgType:    SMS,
+		MsgType:    sendcloud.SMS,
 	})
 	if err != nil {
 		t.Error(err)
@@ -20,11 +23,11 @@ func TestSendTemplateSms(t *testing.T) {
 }
 
 func TestSendVoiceSms(t *testing.T) {
-	client, err := NewSendCloudSms("**", "**")
+	client, err := sendcloud.NewSendCloudSms("**", "**")
 	if err != nil {
 		t.Error(err)
 	}
-	result, err := client.SendVoiceSms(&VoiceSms{
+	result, err := client.SendVoiceSms(&sendcloud.VoiceSms{
 		Code:    "123456",
 		LabelId: 1,
 		Phone:   "13800138000",
@@ -36,11 +39,11 @@ func TestSendVoiceSms(t *testing.T) {
 }
 
 func TestSendCodeSms(t *testing.T) {
-	client, err := NewSendCloudSms("**", "**")
+	client, err := sendcloud.NewSendCloudSms("**", "**")
 	if err != nil {
 		t.Error(err)
 	}
-	result, err := client.SendCodeSms(&CodeSms{
+	result, err := client.SendCodeSms(&sendcloud.CodeSms{
 		Code:    "123456",
 		LabelId: 1,
 		Phone:   "13800138000",
