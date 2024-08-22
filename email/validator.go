@@ -40,7 +40,7 @@ func (e *TemplateMail) validateTemplateMail() error {
 	if err := e.Body.validateMailBody(); err != nil {
 		return err
 	}
-	if e.Content.TemplateInvokeName == "" {
+	if e.TemplateInvokeName == "" {
 		return errors.New("templateInvokeName cannot be empty")
 	}
 	return nil

@@ -125,9 +125,7 @@ func TestSendTemplateEmail(t *testing.T) {
 			Subject:  "Email from SendCloud SDK",
 			FromName: "SendCloud",
 		},
-		Content: sendcloud.TemplateContent{
-			TemplateInvokeName: "test_template_active",
-		},
+		TemplateInvokeName: "test_template_active",
 	}
 	result, err := client.SendTemplateEmail(ctx, args)
 	if err != nil {
@@ -149,9 +147,7 @@ func TestSendTemplateEmailWithVars(t *testing.T) {
 			Subject:  "Email from SendCloud SDK",
 			FromName: "SendCloud",
 		},
-		Content: sendcloud.TemplateContent{
-			TemplateInvokeName: "test_template_active",
-		},
+		TemplateInvokeName: "test_template_active",
 	}
 	xsmtpapi := sendcloud.XSMTPAPI{
 		To: []string{"a@ifaxin.com", "b@ifaxin.com"},
@@ -197,9 +193,7 @@ func TestSendTemplateEmailWithAttachment(t *testing.T) {
 			Subject:  "Email from SendCloud SDK",
 			FromName: "SendCloud",
 		},
-		Content: sendcloud.TemplateContent{
-			TemplateInvokeName: "test_template_active",
-		},
+		TemplateInvokeName: "test_template_active",
 	}
 	args.Body.AddAttachment(attachment1)
 	result, err := client.SendTemplateEmail(ctx, args)

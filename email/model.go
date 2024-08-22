@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	APIBase = "https://api.sendcloud.net/apiv2/mail"
+	APIBase          = "https://api.sendcloud.net/apiv2/mail"
 	sendCommonPath   = "/send"
 	sendTemplatePath = "/sendtemplate"
 	sendCalendarPath = "/sendcalendar"
@@ -37,9 +37,9 @@ type CommonMail struct {
 }
 
 type TemplateMail struct {
-	Receiver MailReceiver
-	Body     MailBody
-	Content  TemplateContent
+	Receiver           MailReceiver
+	Body               MailBody
+	TemplateInvokeName string
 }
 
 type CalendarMail struct {
@@ -49,39 +49,32 @@ type CalendarMail struct {
 	Calendar MailCalendar
 }
 
-
 type MailReceiver struct {
-	To                  string
-	CC                  string
-	BCC                 string
-	UseAddressList      bool
+	To             string
+	CC             string
+	BCC            string
+	UseAddressList bool
 }
 
 type MailBody struct {
-	From                string
-	Subject             string
-	ContentSummary      string
-	FromName            string
-	ReplyTo             string
-	LabelName           string
-	Headers             map[string]string
-	Attachments         []*os.File
-	Xsmtpapi           XSMTPAPI
-	SendRequestID       string
-	RespEmailID         bool
-	UseNotification     bool
+	From            string
+	Subject         string
+	ContentSummary  string
+	FromName        string
+	ReplyTo         string
+	LabelName       string
+	Headers         map[string]string
+	Attachments     []*os.File
+	Xsmtpapi        XSMTPAPI
+	SendRequestID   string
+	RespEmailID     bool
+	UseNotification bool
 }
-
 
 type TextContent struct {
-	Html              string
-	Plain             string
+	Html  string
+	Plain string
 }
-
-type TemplateContent struct {
-	TemplateInvokeName string
-}
-
 
 // SetHTML - Set the html content of the email, required if not using a template.
 func (e *TextContent) SetHTML(html string) {
@@ -93,18 +86,12 @@ func (e *TextContent) SetPlain(plain string) {
 	e.Plain = plain
 }
 
-// SetTemplateInvokeName - Set the template invoke name.
-func (e *TemplateContent) SetTemplateInvokeName(name string) {
-	e.TemplateInvokeName = name
-}
-
-
 type XSMTPAPI struct {
-	To        []string         `json:"to,omitempty"`
-	Sub       map[string][]interface{}  `json:"sub,omitempty"`
-	Pubsub    map[string]interface{}    `json:"pubsub,omitempty"`
-	Filters      *Filter    `json:"filters,omitempty"`
-	Settings      *Settings      `json:"settings,omitempty"`
+	To       []string                 `json:"to,omitempty"`
+	Sub      map[string][]interface{} `json:"sub,omitempty"`
+	Pubsub   map[string]interface{}   `json:"pubsub,omitempty"`
+	Filters  *Filter                  `json:"filters,omitempty"`
+	Settings *Settings                `json:"settings,omitempty"`
 }
 
 func (x XSMTPAPI) IsEmpty() bool {
@@ -124,7 +111,6 @@ type Filter struct {
 	OpenTracking         TrackingFilter `json:"open_tracking"`
 	ClickTracking        TrackingFilter `json:"click_tracking"`
 }
-
 
 // UnsubscribeSettings 表示退订设置的结构体
 type UnsubscribeSettings struct {
@@ -151,12 +137,10 @@ func (e *MailBody) SetFromName(fromName string) {
 	e.FromName = fromName
 }
 
-
 // SetReplyTo - Set the reply to address.
 func (e *MailBody) SetReplyTo(replyTo string) {
 	e.ReplyTo = replyTo
 }
-
 
 // SetLabelName - Set the label name of the email.
 func (e *MailBody) SetLabelName(labelName string) {
@@ -179,64 +163,64 @@ func (e *MailBody) SetXsmtpapi(xsmtpapi XSMTPAPI) {
 }
 
 type MailCalendar struct {
-	StartTime         time.Time
-	EndTime           time.Time
-	Title             string
-	OrganizerName     string
-	OrganizerEmail    string
-	Location          string
-	Description       string
-	ParticipatorNames string
+	StartTime          time.Time
+	EndTime            time.Time
+	Title              string
+	OrganizerName      string
+	OrganizerEmail     string
+	Location           string
+	Description        string
+	ParticipatorNames  string
 	ParticipatorEmails string
-	UID               string
-	IsCancel          bool
-	IsUpdate          bool
-	ValarmTime 		  int
+	UID                string
+	IsCancel           bool
+	IsUpdate           bool
+	ValarmTime         int
 }
 
-//SetStartTime - Set the start time of the calendar.
+// SetStartTime - Set the start time of the calendar.
 func (e *MailCalendar) SetStartTime(startTime time.Time) {
-    e.StartTime = startTime
+	e.StartTime = startTime
 }
 
-//SetEndTime - Set the end time of the calendar.
+// SetEndTime - Set the end time of the calendar.
 func (e *MailCalendar) SetEndTime(endTime time.Time) {
-    e.EndTime = endTime
+	e.EndTime = endTime
 }
 
-//SetTitle - Set the title of the calendar.
+// SetTitle - Set the title of the calendar.
 func (e *MailCalendar) SetTitle(title string) {
-    e.Title = title
+	e.Title = title
 }
 
-//SetOrganizerName - Set the organizer name of the calendar.
+// SetOrganizerName - Set the organizer name of the calendar.
 func (e *MailCalendar) SetOrganizerName(organizerName string) {
-    e.OrganizerName = organizerName
+	e.OrganizerName = organizerName
 }
 
-//SetOrganizerEmail - Set the organizer email of the calendar.
+// SetOrganizerEmail - Set the organizer email of the calendar.
 func (e *MailCalendar) SetOrganizerEmail(organizerEmail string) {
-    e.OrganizerEmail = organizerEmail
+	e.OrganizerEmail = organizerEmail
 }
 
 // SetLocation - Set the location of the calendar.
 func (e *MailCalendar) SetLocation(location string) {
-    e.Location = location
+	e.Location = location
 }
 
 // SetDescription - Set the description of the calendar.
 func (e *MailCalendar) SetDescription(description string) {
-    e.Description = description
+	e.Description = description
 }
 
 // SetParticipatorNames - Set the participator names of the calendar.
 func (e *MailCalendar) SetParticipatorNames(participatorNames string) {
-    e.ParticipatorNames = participatorNames
+	e.ParticipatorNames = participatorNames
 }
 
 // SetParticipatorEmails - Set the participator emails of the calendar.
 func (e *MailCalendar) SetParticipatorEmails(participatorEmails string) {
-    e.ParticipatorEmails = participatorEmails
+	e.ParticipatorEmails = participatorEmails
 }
 
 // SetUID - Set the UID of the calendar.
@@ -246,17 +230,17 @@ func (e *MailCalendar) SetUID(uid string) {
 
 // SetIsCancel - Set the isCancel of the calendar.
 func (e *MailCalendar) SetIsCancel(isCancel bool) {
-    e.IsCancel = isCancel
+	e.IsCancel = isCancel
 }
 
 // SetIsUpdate - Set the isUpdate of the calendar.
 func (e *MailCalendar) SetIsUpdate(isUpdate bool) {
-    e.IsUpdate = isUpdate
+	e.IsUpdate = isUpdate
 }
 
 // SetValarmTime - Set the valarmTime of the calendar.
 func (e *MailCalendar) SetValarmTime(valarmTime int) {
-    e.ValarmTime = valarmTime
+	e.ValarmTime = valarmTime
 }
 
 type SendEmailResult struct {
@@ -265,5 +249,3 @@ type SendEmailResult struct {
 	Message    string      `json:"message"`
 	Info       interface{} `json:"info"`
 }
-
-
