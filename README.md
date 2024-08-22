@@ -148,9 +148,7 @@ func main() {
 			Subject: "Email from SendCloud SDK",
 			FromName: "SendCloud",
 		},
-		Content: sendcloud.TemplateContent{
-			TemplateInvokeName:  "test_template_active",
-		},
+		TemplateInvokeName: "test_template_active",
 	}
 	result, err := client.SendTemplateEmail(ctx, args)
 	if err != nil {
