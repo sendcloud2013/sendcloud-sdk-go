@@ -41,9 +41,9 @@ type TemplateSms struct {
 	LabelId       int
 	MsgType       int
 	Phone         string
-	Vars          string
+	Vars          map[string]string
 	SendRequestId string
-	Tag           string
+	Tag           map[string]string
 }
 
 type VoiceSms struct {
@@ -51,7 +51,7 @@ type VoiceSms struct {
 	Code          string
 	LabelId       int
 	SendRequestId string
-	Tag           string
+	Tag           map[string]string
 }
 
 type CodeSms struct {
@@ -62,7 +62,7 @@ type CodeSms struct {
 	Code          string
 	LabelId       int
 	SendRequestId string
-	Tag           string
+	Tag           map[string]string
 }
 
 type SendSmsResult struct {

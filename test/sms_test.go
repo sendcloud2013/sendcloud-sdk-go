@@ -15,6 +15,12 @@ func TestSendTemplateSms(t *testing.T) {
 		LabelId:    1,
 		Phone:      "13800138000,13800138001",
 		MsgType:    sendcloud.SMS,
+		Vars: map[string]string{
+			"name": "sendcloud",
+		},
+		Tag: map[string]string{
+			"key": "value",
+		},
 	})
 	if err != nil {
 		t.Error(err)
@@ -31,6 +37,9 @@ func TestSendVoiceSms(t *testing.T) {
 		Code:    "123456",
 		LabelId: 1,
 		Phone:   "13800138000",
+		Tag: map[string]string{
+			"key": "value",
+		},
 	})
 	if err != nil {
 		t.Error(err)
@@ -47,6 +56,9 @@ func TestSendCodeSms(t *testing.T) {
 		Code:    "123456",
 		LabelId: 1,
 		Phone:   "13800138000",
+		Tag: map[string]string{
+			"key": "value",
+		},
 	})
 	if err != nil {
 		t.Error(err)
